@@ -1,4 +1,5 @@
 import MainNav from "@/components/main-nav";
+import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
@@ -25,8 +26,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body>
-          <div
-            className={`${inter.className} min-h-screen bg-background antialiased container`}
+          <main
+            className={`${inter.className} min-h-screen bg-background antialiased container flex flex-col`}
           >
             <ThemeProvider
               attribute="class"
@@ -37,7 +38,8 @@ export default function RootLayout({
               <MainNav />
               {children}
             </ThemeProvider>
-          </div>
+            <Footer />
+          </main>
         </body>
       </html>
     </ClerkProvider>

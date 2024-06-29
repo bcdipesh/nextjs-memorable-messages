@@ -5,11 +5,11 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function MainNav() {
   return (
-    <header className="py-4">
+    <header className="my-4">
       <nav className="flex flex-col md:flex-row justify-between">
         <Logo />
 
-        <div className="flex justify-between space-x-4">
+        <div className="flex justify-between space-x-4 my-4 md:my-0">
           <div>
             <SignedOut>
               <Button variant="ghost" asChild>
