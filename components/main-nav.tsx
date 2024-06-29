@@ -18,7 +18,13 @@ export default function MainNav() {
             </SignedOut>
 
             <SignedIn>
-              <UserButton />
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonTrigger: "size-9",
+                  },
+                }}
+              />
             </SignedIn>
           </div>
 
