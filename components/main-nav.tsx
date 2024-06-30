@@ -2,8 +2,11 @@ import Logo from "@/components/logo";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { checkUser } from "@/lib/checkUser";
 
-export default function MainNav() {
+export default async function MainNav() {
+  await checkUser();
+
   return (
     <header className="my-4">
       <nav className="flex flex-col md:flex-row justify-between">
