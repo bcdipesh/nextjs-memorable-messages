@@ -15,11 +15,27 @@ datasource db {
 
 // Database Models
 model User {
-  id          String   @id @default(uuid())
-  clerkUserId String   @unique
-  email       String   @unique
+  id          String     @id @default(uuid())
+  clerkUserId String     @unique
+  email       String     @unique
   name        String?
   imageUrl    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  occasions   Occasion[]
+}
+
+model Occasion {
+  id             String   @id @default(uuid())
+  occasionType   String
+  message        String
+  receiverEmail  String
+  deliveryMethod String
+  deliveryDate   DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  User           User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
+  userId         String
+
+  @@index([userId])
 }
