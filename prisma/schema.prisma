@@ -32,6 +32,7 @@ model Occasion {
   receiverEmail  String
   deliveryMethod String
   deliveryDate   DateTime
+  status         String   @default("Pending")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   User           User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
