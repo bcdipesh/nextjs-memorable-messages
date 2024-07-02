@@ -1,6 +1,7 @@
-import MainNav from "@/components/main-nav";
 import Footer from "@/components/footer";
+import MainNav from "@/components/main-nav";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -40,6 +41,7 @@ export default function RootLayout({
             </ThemeProvider>
             <Footer />
           </main>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

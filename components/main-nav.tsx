@@ -1,8 +1,8 @@
 import Logo from "@/components/logo";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { checkUser } from "@/lib/check-user";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { checkUser } from "@/lib/checkUser";
 
 export default async function MainNav() {
   await checkUser();

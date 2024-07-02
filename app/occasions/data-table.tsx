@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { PlusIcon } from "@radix-ui/react-icons";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -19,6 +20,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import Link from "next/link";
 import { useState } from "react";
 
 interface DataTableProps<TData, TValue> {
@@ -50,7 +52,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Filter emails..."
           value={
@@ -61,6 +63,11 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <Button variant="outline" size="icon" asChild>
+          <Link href="/occasions/create">
+            <PlusIcon />
+          </Link>
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>

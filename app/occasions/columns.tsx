@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -17,23 +18,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteOccasion } from "@/lib/mutations/delete-occasion";
+import { type Occasion } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
-
-export type Occasion = {
-  id: string;
-  occasionType: string;
-  message: string;
-  receiverEmail: string;
-  deliveryMethod: string;
-  deliveryDate: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  userId: string;
-};
 
 export const columns: ColumnDef<Occasion>[] = [
   {
@@ -121,7 +111,14 @@ export const columns: ColumnDef<Occasion>[] = [
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              <Button type="submit">Confirm</Button>
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  onClick={() => deleteOccasion(occasion.id)}
+                >
+                  Confirm
+                </Button>
+              </DialogClose>
             </DialogFooter>
           </DialogContent>
         </Dialog>
