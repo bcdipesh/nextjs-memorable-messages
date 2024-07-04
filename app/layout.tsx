@@ -41,7 +41,7 @@ export default function RootLayout({
             </ThemeProvider>
             <Footer />
           </main>
-          <Toaster />
+          <Toaster position="top-center" />
         </body>
       </html>
     </ClerkProvider>

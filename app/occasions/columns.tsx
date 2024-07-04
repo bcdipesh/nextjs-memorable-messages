@@ -83,14 +83,14 @@ export const columns: ColumnDef<Occasion>[] = [
     id: "actions",
     cell: ({ row }) => {
       const occasion = row.original;
-      const onDelete = async (occasionId: string) => {
-        const { error, message } = await deleteOccasion(occasionId);
+      const onDelete = (occasionId: string) => {
+        const promise = deleteOccasion(occasionId);
 
-        if (error) {
-          toast.error(error);
-        } else {
-          toast.success(message);
-        }
+        toast.promise(promise, {
+          loading: "Deleting occasion...",
+          success: ({ message }) => message,
+          error: ({ error }) => error,
+        });
       };
 
       return (
