@@ -17,14 +17,14 @@ export async function getOccasions(): Promise<{
   }
 
   try {
-    const occasions = await db.occasion.findMany({
+    const occasions = (await db.occasion.findMany({
       where: {
         userId,
       },
       orderBy: {
         createdAt: "desc",
       },
-    });
+    })) as Occasion[];
 
     return { occasions };
   } catch (error) {
@@ -47,11 +47,11 @@ export async function getOccasionById(occasionId: string): Promise<{
   }
 
   try {
-    const occasion = await db.occasion.findUnique({
+    const occasion = (await db.occasion.findUnique({
       where: {
         id: occasionId,
       },
-    });
+    })) as Occasion;
 
     return {
       occasion,

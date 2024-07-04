@@ -1,4 +1,6 @@
+import { UpdateOccasionForm } from "@/app/occasions/[id]/update-occasion";
 import { getOccasionById } from "@/lib/queries/occasions";
+import { Occasion } from "@/lib/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -15,7 +17,6 @@ interface OccasionDetailPageProps {
 export default async function OccasionDetailPage({
   params,
 }: OccasionDetailPageProps) {
-  console.log(params.id);
   const { error, occasion } = await getOccasionById(params.id);
 
   if (error) {
@@ -27,6 +28,10 @@ export default async function OccasionDetailPage({
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
         Occasion Detail
       </h1>
+
+      <div className="mt-4">
+        <UpdateOccasionForm occasion={occasion as Occasion} />
+      </div>
     </div>
   );
 }

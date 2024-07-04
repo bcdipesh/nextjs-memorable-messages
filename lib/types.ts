@@ -3,7 +3,7 @@ export interface Occasion {
   occasionType: string;
   message: string;
   receiverEmail: string;
-  deliveryMethod: string;
+  deliveryMethod: "Email" | "SMS";
   deliveryDate: Date;
   status: string;
   createdAt: Date;

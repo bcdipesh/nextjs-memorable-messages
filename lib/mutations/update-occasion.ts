@@ -16,7 +16,8 @@ const FormSchema = z.object({
   deliveryDate: z.string(),
 });
 
-export async function createOccasion(
+export async function updateOccasion(
+  id: string,
   formData: z.infer<typeof FormSchema>,
 ): Promise<{
   occasion?: Occasion;
@@ -31,7 +32,10 @@ export async function createOccasion(
   }
 
   try {
-    const occasion = (await db.occasion.create({
+    const occasion = (await db.occasion.update({
+      where: {
+        id,
+      },
       data: {
         ...formData,
         deliveryDate: new Date(formData.deliveryDate),
