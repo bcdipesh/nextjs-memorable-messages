@@ -1,5 +1,6 @@
 "use client";
 
+import { createOccasion } from "@/app/occasions/create/_actions/create-occasion";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,7 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createOccasion } from "@/lib/mutations/create-occasion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";

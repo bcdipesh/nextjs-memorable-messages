@@ -1,7 +1,7 @@
+import { getOccasions } from "@/app/occasions/_actions/get-occasion";
+import { type Occasion } from "@/app/occasions/_lib/types";
 import { columns } from "@/app/occasions/columns";
 import { DataTable } from "@/app/occasions/data-table";
-import { getOccasions } from "@/lib/queries/occasions";
-import { type Occasion } from "@/lib/types";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

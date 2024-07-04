@@ -1,6 +1,6 @@
 import { UpdateOccasionForm } from "@/app/occasions/[id]/update-occasion";
-import { getOccasionById } from "@/lib/queries/occasions";
-import { Occasion } from "@/lib/types";
+import { getOccasionById } from "@/app/occasions/_actions/get-occasion";
+import { type Occasion } from "@/app/occasions/_lib/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

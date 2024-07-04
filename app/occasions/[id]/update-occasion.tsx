@@ -1,5 +1,7 @@
 "use client";
 
+import { updateOccasion } from "@/app/occasions/[id]/_actions/update-occasion";
+import { Occasion } from "@/app/occasions/_lib/types";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,9 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updateOccasion } from "@/lib/mutations/update-occasion";
-import { Occasion } from "@/lib/types";
-import { convertToDateTimeLocalString } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -28,6 +27,17 @@ const formSchema = z.object({
   }),
   deliveryDate: z.string(),
 });
+
+const convertToDateTimeLocalString = (date: Date) => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+};
 
 interface UpdateOccasionFormProps {
   occasion: Occasion;

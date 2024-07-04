@@ -1,8 +1,42 @@
 import Logo from "@/components/logo";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { checkUser } from "@/lib/check-user";
+import { db } from "@/lib/db";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
+
+const checkUser = async () => {
+  const user = await currentUser();
+
+  // Check for current logged in clerk user
+  if (!user) {
+    return null;
+  }
+
+  // Check if the user is already in the database
+  const loggedInUser = await db.user.findUnique({
+    where: {
+      clerkUserId: user.id,
+    },
+  });
+
+  // If user is in the database, return user
+  if (loggedInUser) {
+    return loggedInUser;
+  }
+
+  // If not in database, create new user
+  const newUser = await db.user.create({
+    data: {
+      clerkUserId: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      imageUrl: user.imageUrl,
+      email: user.emailAddresses[0].emailAddress,
+    },
+  });
+
+  return newUser;
+};
 
 export default async function MainNav() {
   await checkUser();

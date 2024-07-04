@@ -1,5 +1,7 @@
 "use client";
 
+import { deleteOccasion } from "@/app/occasions/_actions/delete-occasion";
+import { type Occasion } from "@/app/occasions/_lib/types";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,13 +20,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { deleteOccasion } from "@/lib/mutations/delete-occasion";
-import { type Occasion } from "@/lib/types";
-import { formatDate } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+
+const formatDate = (date: Date) => {
+  return `${date.toDateString()}, ${date.toLocaleTimeString()}`;
+};
 
 export const columns: ColumnDef<Occasion>[] = [
   {

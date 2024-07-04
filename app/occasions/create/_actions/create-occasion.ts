@@ -1,7 +1,7 @@
 "use server";
 
+import { type Occasion } from "@/app/occasions/_lib/types";
 import { db } from "@/lib/db";
-import { type Occasion } from "@/lib/types";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
