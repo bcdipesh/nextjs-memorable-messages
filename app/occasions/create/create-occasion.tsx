@@ -12,7 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { createOccasion } from "@/lib/mutations/create-occasion";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -26,6 +28,7 @@ const formSchema = z.object({
 });
 
 export function CreateOccasionForm() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,7 +41,15 @@ export function CreateOccasionForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    createOccasion(values);
+    const { error } = await createOccasion(values);
+
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success("Occasion successfully created.");
+    }
+
+    router.push("/occasions");
   };
 
   return (

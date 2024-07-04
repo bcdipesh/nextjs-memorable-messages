@@ -24,6 +24,7 @@ import { formatDate } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export const columns: ColumnDef<Occasion>[] = [
   {
@@ -79,6 +80,15 @@ export const columns: ColumnDef<Occasion>[] = [
     id: "actions",
     cell: ({ row }) => {
       const occasion = row.original;
+      const onDelete = async (occasionId: string) => {
+        const { error, message } = await deleteOccasion(occasionId);
+
+        if (error) {
+          toast.error(error);
+        } else {
+          toast.success(message);
+        }
+      };
 
       return (
         <Dialog>
@@ -93,12 +103,19 @@ export const columns: ColumnDef<Occasion>[] = [
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() => navigator.clipboard.writeText(occasion.id)}
+                className="cursor-pointer"
               >
                 Copy occasion ID
               </DropdownMenuItem>
-              <DropdownMenuItem>View/Update occasion</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href={`/occasions/${occasion.id}`}>
+                  View/Update occasion
+                </Link>
+              </DropdownMenuItem>
               <DialogTrigger asChild>
-                <DropdownMenuItem>Delete occasion</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  Delete occasion
+                </DropdownMenuItem>
               </DialogTrigger>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -112,10 +129,7 @@ export const columns: ColumnDef<Occasion>[] = [
             </DialogHeader>
             <DialogFooter>
               <DialogClose asChild>
-                <Button
-                  type="button"
-                  onClick={() => deleteOccasion(occasion.id)}
-                >
+                <Button type="button" onClick={() => onDelete(occasion.id)}>
                   Confirm
                 </Button>
               </DialogClose>

@@ -1,9 +1,9 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { type Occasion } from "@/lib/types";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -19,6 +19,7 @@ const FormSchema = z.object({
 export async function createOccasion(
   formData: z.infer<typeof FormSchema>,
 ): Promise<{
+  occasion?: Occasion;
   error?: string;
 }> {
   const { userId } = auth();
@@ -30,7 +31,7 @@ export async function createOccasion(
   }
 
   try {
-    await db.occasion.create({
+    const occasion = await db.occasion.create({
       data: {
         ...formData,
         deliveryDate: new Date(formData.deliveryDate),
@@ -39,10 +40,13 @@ export async function createOccasion(
     });
 
     revalidatePath("/occasions");
+
+    return {
+      occasion
+    }
   } catch (error) {
     return {
       error: "Database error.",
     };
   }
-  redirect("/occasions");
 }
