@@ -1,15 +1,15 @@
 "use server";
 
+import { getUser } from "@/app/occasions/_lib/utils";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export async function deleteOccasion(
   occasionId: string,
 ): Promise<{ message?: string; error?: string }> {
-  const { userId } = auth();
+  const user = await getUser();
 
-  if (!userId) {
+  if (!user) {
     return {
       error: "User not found.",
     };
@@ -19,7 +19,7 @@ export async function deleteOccasion(
     await db.occasion.delete({
       where: {
         id: occasionId,
-        userId,
+        userId: user.id,
       },
     });
 

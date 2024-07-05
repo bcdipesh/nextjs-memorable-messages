@@ -1,16 +1,16 @@
 "use server";
 
 import { type Occasion } from "@/app/occasions/_lib/types";
+import { getUser } from "@/app/occasions/_lib/utils";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 
 export async function getOccasions(): Promise<{
   occasions?: Occasion[];
   error?: string;
 }> {
-  const { userId } = auth();
+  const user = await getUser();
 
-  if (!userId) {
+  if (!user) {
     return {
       error: "User not found.",
     };
@@ -19,7 +19,7 @@ export async function getOccasions(): Promise<{
   try {
     const occasions = (await db.occasion.findMany({
       where: {
-        userId,
+        userId: user.id,
       },
       orderBy: {
         createdAt: "desc",
@@ -38,9 +38,9 @@ export async function getOccasionById(occasionId: string): Promise<{
   occasion?: Occasion | null;
   error?: string;
 }> {
-  const { userId } = auth();
+  const user = await getUser();
 
-  if (!userId) {
+  if (!user) {
     return {
       error: "User not found.",
     };

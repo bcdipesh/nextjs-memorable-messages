@@ -16,7 +16,7 @@ datasource db {
 // Database Models
 model User {
   id          String     @id @default(uuid())
-  clerkUserId String     @unique
+  kindeUserId String     @unique
   email       String     @unique
   name        String?
   imageUrl    String?
@@ -35,7 +35,7 @@ model Occasion {
   status         String   @default("Pending")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  User           User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
+  User           User     @relation(fields: [userId], references: [kindeUserId], onDelete: Cascade)
   userId         String
 
   @@index([userId])

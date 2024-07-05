@@ -1,8 +1,8 @@
 "use server";
 
 import { type Occasion } from "@/app/occasions/_lib/types";
+import { getUser } from "@/app/occasions/_lib/utils";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -22,9 +22,9 @@ export async function createOccasion(
   occasion?: Occasion;
   error?: string;
 }> {
-  const { userId } = auth();
+  const user = await getUser();
 
-  if (!userId) {
+  if (!user) {
     return {
       error: "User not found.",
     };
@@ -35,7 +35,7 @@ export async function createOccasion(
       data: {
         ...formData,
         deliveryDate: new Date(formData.deliveryDate),
-        userId,
+        userId: user.id,
       },
     })) as Occasion;
 

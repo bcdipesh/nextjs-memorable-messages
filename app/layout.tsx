@@ -39,9 +39,9 @@ export default function RootLayout({
               <MainNav />
               {children}
             </ThemeProvider>
-            <Footer />
           </main>
           <Toaster position="top-center" />
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
