@@ -4,12 +4,12 @@ import { updateOccasion } from "@/app/occasions/[id]/_actions/update-occasion";
 import { Occasion } from "@/app/occasions/_lib/types";
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,14 +56,16 @@ export function UpdateOccasionForm({ occasion }: UpdateOccasionFormProps) {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const promise = updateOccasion(occasion.id, values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    toast.loading("Updaing occasion...");
+    const { error } = await updateOccasion(occasion.id, values);
+    toast.dismiss();
 
-    toast.promise(promise, {
-      loading: "Updating occasion...",
-      success: "Occasion successfully updated.",
-      error: ({error}) => error
-    })
+    if (error) {
+      toast.error(error);
+    }
+
+    toast.success("Occasion successfully updated.");
 
     router.push("/occasions");
   };

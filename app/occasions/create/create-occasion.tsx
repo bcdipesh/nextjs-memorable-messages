@@ -40,14 +40,16 @@ export function CreateOccasionForm() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const promise = createOccasion(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    toast.loading("Creating occasion...");
+    const { error } = await createOccasion(values);
+    toast.dismiss();
 
-    toast.promise(promise, {
-      loading: "Creating occasion...",
-      success: "Occasion successfully created.",
-      error: ({ error }) => error,
-    });
+    if (error) {
+      toast.error(error);
+    }
+
+    toast.success("Occasion successfully created.");
 
     router.push("/occasions");
   };
