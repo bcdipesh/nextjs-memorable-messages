@@ -24,7 +24,7 @@ export default async function OccasionDetailPage({
   }
 
   return (
-    <div className="flex-grow my-4">
+    <div className="container flex-grow my-4">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
         Occasion Detail
       </h1>

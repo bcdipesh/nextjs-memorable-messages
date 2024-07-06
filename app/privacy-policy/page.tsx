@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="my-4">
+    <div className="container my-4">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
         Memorable Messages Privacy Policy
       </h1>

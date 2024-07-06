@@ -24,20 +24,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
-        <main
-          className={`${inter.className} min-h-screen bg-background antialiased container flex flex-col`}
+      <body
+        className={`${inter.className} min-h-screen bg-background antialiased flex flex-col`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <MainNav />
-            {children}
-          </ThemeProvider>
-        </main>
+          <MainNav />
+          {children}
+        </ThemeProvider>
         <Toaster position="top-center" />
         <Footer />
       </body>

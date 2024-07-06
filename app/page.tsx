@@ -13,7 +13,7 @@ export default async function Home() {
   const user = await getUser();
 
   return (
-    <div className="flex-grow grid grid-cols-3 place-content-center">
+    <div className="container flex-grow grid grid-cols-3 place-content-center my-4">
       {user ? (
         <div className="col-span-full md:col-end-3 md:row-start-1">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">

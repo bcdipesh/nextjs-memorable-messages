@@ -12,11 +12,11 @@ export default async function OccasionsPage() {
   const { error, occasions } = await getOccasions();
 
   if (error) {
-    return <p className="flex-grow">{error}</p>;
+    return <p className="container flex-grow">{error}</p>;
   }
 
   return (
-    <div className="flex-grow my-4">
+    <div className="container flex-grow my-4">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
         Occasions
       </h1>

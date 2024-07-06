@@ -61,7 +61,7 @@ export default async function MainNav() {
   }
 
   return (
-    <header className="my-4">
+    <header className="my-4 container">
       <nav className="flex flex-col md:flex-row justify-between">
         <Logo />
 
