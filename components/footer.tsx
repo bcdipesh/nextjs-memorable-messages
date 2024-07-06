@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
         </div>
         <hr className="my-6 border-muted-foreground" />
-        <p className="mt-10 text-xs">
+        <p className="mt-10 text-xs text-muted-foreground">
           &copy; {currentYear} Memorable Messages. Made to create memories that
           will last a lifetime.
         </p>
