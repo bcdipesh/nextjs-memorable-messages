@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default async function OccasionDetailPage() {
   return (
-    <div className="container flex-grow my-4">
+    <div className="container">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
         Create Occasion
       </h1>
