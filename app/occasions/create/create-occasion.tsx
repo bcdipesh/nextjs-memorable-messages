@@ -1,5 +1,6 @@
 "use client";
 
+// import { scheduleEmail } from "@/app/occasions/_actions/schedule-occasion";
 import { createOccasion } from "@/app/occasions/create/_actions/create-occasion";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,14 +43,15 @@ export function CreateOccasionForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     toast.loading("Creating occasion...");
-    const { error } = await createOccasion(values);
+    const { error, occasion } = await createOccasion(values);
     toast.dismiss();
 
     if (error) {
       toast.error(error);
+    } else {
+      toast.success("Occasion successfully created.");
+      // scheduleEmail(occasion as Occasion);
     }
-
-    toast.success("Occasion successfully created.");
 
     router.push("/occasions");
   };

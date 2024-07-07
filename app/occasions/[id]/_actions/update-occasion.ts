@@ -1,9 +1,10 @@
 "use server";
 
 import { type Occasion } from "@/app/occasions/_lib/types";
-import { getUser } from "@/app/occasions/_lib/utils";
+import { getUser, isLoggedIn } from "@/app/occasions/_lib/utils";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -13,7 +14,7 @@ const FormSchema = z.object({
   deliveryMethod: z.enum(["Email", "SMS"], {
     message: "Only Email and SMS can be used as delivery method",
   }),
-  deliveryDate: z.string(),
+  deliveryDate: z.string().or(z.date()),
 });
 
 export async function updateOccasion(
@@ -23,6 +24,10 @@ export async function updateOccasion(
   occasion?: Occasion;
   error?: string;
 }> {
+  if (!(await isLoggedIn())) {
+    return redirect("/api/auth/login");
+  }
+
   const user = await getUser();
 
   if (!user) {

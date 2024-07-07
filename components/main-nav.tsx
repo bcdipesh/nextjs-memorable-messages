@@ -49,11 +49,11 @@ export default async function MainNav() {
     );
   } else {
     jsxContent = (
-      <div className="space-x-4">
-        <Button variant="ghost" asChild>
+      <div className="flex gap-x-4">
+        <Button className="order-1 md:order-0" variant="ghost" asChild>
           <LoginLink>Sign in</LoginLink>
         </Button>
-        <Button asChild>
+        <Button className="order-0 md:order-1" asChild>
           <RegisterLink>Start for free</RegisterLink>
         </Button>
       </div>
@@ -61,7 +61,7 @@ export default async function MainNav() {
   }
 
   return (
-    <header className="my-4 container">
+    <header className="my-10 container">
       <nav className="flex flex-col md:flex-row justify-between">
         <Logo />
 

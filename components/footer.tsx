@@ -14,7 +14,7 @@ export default function Footer() {
             <Button variant="link" asChild className="pl-0">
               <Link href="/terms-of-service">Terms of service</Link>
             </Button>
-            <Button variant="link" asChild>
+            <Button variant="link" asChild className="pr-0">
               <Link href="privacy-policy">Privacy notice</Link>
             </Button>
           </div>

@@ -1,13 +1,19 @@
 "use server";
 
 import { type Occasion } from "@/app/occasions/_lib/types";
-import { getUser } from "@/app/occasions/_lib/utils";
+import { getUser, isLoggedIn } from "@/app/occasions/_lib/utils";
 import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
+
 
 export async function getOccasions(): Promise<{
   occasions?: Occasion[];
   error?: string;
 }> {
+  if (!(await isLoggedIn())) {
+    return redirect("/api/auth/login");
+  }
+
   const user = await getUser();
 
   if (!user) {
@@ -38,6 +44,10 @@ export async function getOccasionById(occasionId: string): Promise<{
   occasion?: Occasion | null;
   error?: string;
 }> {
+  if (!(await isLoggedIn())) {
+    return redirect("/api/auth/login");
+  }
+
   const user = await getUser();
 
   if (!user) {

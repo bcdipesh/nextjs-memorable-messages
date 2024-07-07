@@ -49,7 +49,7 @@ export const columns: ColumnDef<Occasion>[] = [
   },
   {
     accessorKey: "receiverEmail",
-    header: "Email",
+    header: "Receiver Email",
   },
   {
     accessorKey: "deliveryMethod",

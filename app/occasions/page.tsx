@@ -1,14 +1,20 @@
 import { getOccasions } from "@/app/occasions/_actions/get-occasion";
 import { type Occasion } from "@/app/occasions/_lib/types";
+import { isLoggedIn } from "@/app/occasions/_lib/utils";
 import { columns } from "@/app/occasions/columns";
 import { DataTable } from "@/app/occasions/data-table";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Occasions",
 };
 
 export default async function OccasionsPage() {
+  if (!(await isLoggedIn())) {
+    return redirect("/api/auth/login");
+  }
+
   const { error, occasions } = await getOccasions();
 
   if (error) {

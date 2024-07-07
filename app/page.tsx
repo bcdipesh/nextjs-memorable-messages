@@ -62,7 +62,7 @@ export default async function Home() {
             Click on the Start now button to start sending memorable messages
             today!
           </p>
-          <Button asChild className="w-fit mt-2">
+          <Button asChild className="w-fit mt-4">
             <Link href="/occasions">Start now</Link>
           </Button>
         </>
