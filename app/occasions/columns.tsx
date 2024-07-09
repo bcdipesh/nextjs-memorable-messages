@@ -105,7 +105,10 @@ export const columns: ColumnDef<Occasion>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(occasion.id)}
+                onClick={() => {
+                  navigator.clipboard.writeText(occasion.id);
+                  toast.success("ID copied!");
+                }}
                 className="cursor-pointer"
               >
                 Copy occasion ID

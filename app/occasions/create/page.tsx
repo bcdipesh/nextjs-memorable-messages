@@ -3,14 +3,13 @@ import { CreateOccasionForm } from "@/app/occasions/create/create-occasion";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-
 export const metadata: Metadata = {
   title: "Occasion Details",
 };
 
 export default async function OccasionDetailPage() {
-  if(!(await isLoggedIn())) {
-    return redirect("/api/auth/login")
+  if (!(await isLoggedIn())) {
+    return redirect("/api/auth/login");
   }
 
   return (

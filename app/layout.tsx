@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} min-h-screen bg-background antialiased flex flex-col justify-between gap-y-4`}
+        className={`${inter.className} flex min-h-dvh flex-col gap-y-4 bg-background antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -33,11 +33,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <MainNav />
-          {children}
+          <div className="flex min-h-dvh flex-col">
+            <MainNav />
+            <main className="flex-1">{children}</main>
+            <Toaster position="top-center" />
+            <Footer />
+          </div>
         </ThemeProvider>
-        <Toaster position="top-center" />
-        <Footer />
       </body>
     </html>
   );

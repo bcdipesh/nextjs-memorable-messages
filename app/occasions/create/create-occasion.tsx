@@ -1,6 +1,7 @@
 "use client";
 
-// import { scheduleEmail } from "@/app/occasions/_actions/schedule-occasion";
+import { scheduleEmail } from "@/app/occasions/_actions/schedule-occasion";
+import { type Occasion } from "@/app/occasions/_lib/types";
 import { createOccasion } from "@/app/occasions/create/_actions/create-occasion";
 import { Button } from "@/components/ui/button";
 import {
@@ -50,7 +51,7 @@ export function CreateOccasionForm() {
       toast.error(error);
     } else {
       toast.success("Occasion successfully created.");
-      // scheduleEmail(occasion as Occasion);
+      scheduleEmail(occasion as Occasion);
     }
 
     router.push("/occasions");
