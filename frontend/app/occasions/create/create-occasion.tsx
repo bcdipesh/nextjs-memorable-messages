@@ -54,10 +54,10 @@ export function CreateOccasionForm() {
 
     let API_URL = "";
 
-    if (process.env.NODE_ENV !== "production") {
-      API_URL = "http://127.0.0.1:5000/api/v1/occasions/schedule";
-    } else {
+    if (process.env.NODE_ENV === "production") {
       API_URL = `${process.env.MEMORABLE_MESSAGES_API}/occasions/schedule`;
+    } else {
+      API_URL = "http://127.0.0.1:5000/api/v1/occasions/schedule";
     }
 
     const res = await fetch(API_URL, {
