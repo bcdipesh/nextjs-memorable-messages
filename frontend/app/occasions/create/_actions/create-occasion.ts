@@ -40,7 +40,7 @@ export async function createOccasion(
     const occasion = (await db.occasion.create({
       data: {
         ...formData,
-        deliveryDate: new Date(formData.deliveryDate).toISOString(),
+        deliveryDate: formData.deliveryDate,
         userId: user.id,
       },
     })) as Occasion;

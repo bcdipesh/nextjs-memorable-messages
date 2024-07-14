@@ -43,7 +43,10 @@ export function CreateOccasionForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     toast.loading("Creating occasion...");
-    const { error, occasion } = await createOccasion(values);
+    const { error, occasion } = await createOccasion({
+      ...values,
+      deliveryDate: new Date(values.deliveryDate).toISOString(),
+    });
     toast.dismiss();
 
     if (error) {
