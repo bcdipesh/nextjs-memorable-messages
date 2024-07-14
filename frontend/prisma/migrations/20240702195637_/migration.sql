@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Occasion" ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP NOT NULL,
+ALTER COLUMN "status" DROP NOT NULL;
