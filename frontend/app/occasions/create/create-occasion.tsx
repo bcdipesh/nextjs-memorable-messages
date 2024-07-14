@@ -52,23 +52,33 @@ export function CreateOccasionForm() {
       toast.success("Occasion successfully created.");
     }
 
-    let API_URL = "";
-
     if (process.env.NODE_ENV === "production") {
-      API_URL = `${process.env.MEMORABLE_MESSAGES_API}/occasions/schedule`;
+      const res = await fetch(
+        "https://memorablemessagesapi.vercel.app/occasions/schedule",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(occasion),
+        }
+      );
+      const { data } = await res.json();
+      console.log(data);
     } else {
-      API_URL = "http://127.0.0.1:5000/api/v1/occasions/schedule";
+      const res = await fetch(
+        "http://127.0.0.1:5000/api/v1/occasions/schedule",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(occasion),
+        }
+      );
+      const { data } = await res.json();
+      console.log(data);
     }
-
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(occasion),
-    });
-    const { data } = await res.json();
-    console.log(data);
 
     router.push("/occasions");
   };
