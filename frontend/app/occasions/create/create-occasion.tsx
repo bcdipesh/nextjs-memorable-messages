@@ -54,7 +54,7 @@ export function CreateOccasionForm() {
 
     if (process.env.NODE_ENV === "production") {
       const res = await fetch(
-        "https://memorablemessagesapi.vercel.app/occasions/schedule",
+        "https://memorablemessagesapi.vercel.app/api/v1/occasions/schedule",
         {
           method: "POST",
           headers: {
