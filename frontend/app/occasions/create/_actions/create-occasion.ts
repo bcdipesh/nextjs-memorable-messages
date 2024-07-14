@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { formatISO } from "date-fns";
 
 import { type Occasion } from "@/app/occasions/_lib/types";
 import { getUser, isLoggedIn } from "@/app/occasions/_lib/utils";
@@ -41,7 +40,7 @@ export async function createOccasion(
     const occasion = (await db.occasion.create({
       data: {
         ...formData,
-        deliveryDate: formatISO(formData.deliveryDate),
+        deliveryDate: new Date(formData.deliveryDate).toISOString(),
         userId: user.id,
       },
     })) as Occasion;
