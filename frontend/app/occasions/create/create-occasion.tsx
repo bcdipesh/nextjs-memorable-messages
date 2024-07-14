@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { formatISO } from "date-fns";
 
 import { createOccasion } from "@/app/occasions/create/_actions/create-occasion";
 import { Button } from "@/components/ui/button";
@@ -43,7 +44,10 @@ export function CreateOccasionForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     toast.loading("Creating occasion...");
-    const { error, occasion } = await createOccasion(values);
+    const { error, occasion } = await createOccasion({
+      ...values,
+      deliveryDate: formatISO(values.deliveryDate),
+    });
     toast.dismiss();
 
     if (error) {
