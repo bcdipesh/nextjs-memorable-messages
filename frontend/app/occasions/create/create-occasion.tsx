@@ -52,7 +52,15 @@ export function CreateOccasionForm() {
       toast.success("Occasion successfully created.");
     }
 
-    const res = await fetch("http://127.0.0.1:5000/api/v1/occasions/schedule", {
+    let API_URL = "";
+
+    if (process.env.NODE_ENV !== "production") {
+      API_URL = "http://127.0.0.1:5000/api/v1/occasions/schedule";
+    } else {
+      API_URL = `${process.env.MEMORABLE_MESSAGES_API}/occasions/schedule`;
+    }
+
+    const res = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +68,7 @@ export function CreateOccasionForm() {
       body: JSON.stringify(occasion),
     });
     const { data } = await res.json();
+    console.log(data);
 
     router.push("/occasions");
   };
