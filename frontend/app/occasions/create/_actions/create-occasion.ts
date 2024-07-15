@@ -7,6 +7,7 @@ import { z } from "zod";
 import { type Occasion } from "@/app/occasions/_lib/types";
 import { getUser, isLoggedIn } from "@/app/occasions/_lib/utils";
 import { db } from "@/lib/db";
+import { scheduleOccasion } from "@/app/occasions/_actions/schedule-occasion";
 
 const FormSchema = z.object({
   occasionType: z.string().min(1, "Occasion Type is required"),
@@ -43,6 +44,7 @@ export async function createOccasion(
         userId: user.id,
       },
     })) as Occasion;
+    scheduleOccasion({ occasion, action: "CREATE" });
 
     revalidatePath("/occasions");
 

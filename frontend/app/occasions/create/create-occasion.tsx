@@ -43,7 +43,7 @@ export function CreateOccasionForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     toast.loading("Creating occasion...");
-    const { error, occasion } = await createOccasion({
+    const { error } = await createOccasion({
       ...values,
       deliveryDate: new Date(values.deliveryDate).toISOString(),
     });
@@ -53,34 +53,6 @@ export function CreateOccasionForm() {
       toast.error(error);
     } else {
       toast.success("Occasion successfully created.");
-    }
-
-    if (process.env.NODE_ENV === "production") {
-      const res = await fetch(
-        "https://memorablemessagesapi.vercel.app/api/v1/occasions/schedule",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(occasion),
-        }
-      );
-      const { data } = await res.json();
-      console.log(data);
-    } else {
-      const res = await fetch(
-        "http://127.0.0.1:5000/api/v1/occasions/schedule",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(occasion),
-        }
-      );
-      const { data } = await res.json();
-      console.log(data);
     }
 
     router.push("/occasions");
