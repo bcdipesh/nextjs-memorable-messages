@@ -58,7 +58,10 @@ export function UpdateOccasionForm({ occasion }: UpdateOccasionFormProps) {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     toast.loading("Updaing occasion...");
-    const { error } = await updateOccasion(occasion.id, values);
+    const { error } = await updateOccasion(occasion.id, {
+      ...values,
+      deliveryDate: new Date(values.deliveryDate).toISOString(),
+    });
     toast.dismiss();
 
     if (error) {

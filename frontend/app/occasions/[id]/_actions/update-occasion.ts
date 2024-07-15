@@ -19,7 +19,7 @@ const FormSchema = z.object({
 
 export async function updateOccasion(
   id: string,
-  formData: z.infer<typeof FormSchema>,
+  formData: z.infer<typeof FormSchema>
 ): Promise<{
   occasion?: Occasion;
   error?: string;
@@ -43,7 +43,6 @@ export async function updateOccasion(
       },
       data: {
         ...formData,
-        deliveryDate: new Date(formData.deliveryDate),
         userId: user.id,
       },
     })) as Occasion;
