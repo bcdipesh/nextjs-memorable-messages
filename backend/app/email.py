@@ -23,16 +23,15 @@ def send_email(app, subject, sender, recipients, text_body, html_body):
         mail.send(msg)
 
 
-def schedule_email(occasion, action="CREATE"):
+def schedule_email(occasion, job_id, action="CREATE"):
     """
     Schedule or update an email job based on the occasion's details and action.
 
     Args:
     - occasion: The Occasion model instance representing the scheduled email.
+    - job_id: The id of the job.
     - action: The action to perform (CREATE, UPDATE, DELETE).
     """
-
-    job_id = occasion["id"]
 
     if action == "UPDATE" and scheduler.get_job(job_id) is not None:
         scheduler.modify_job(
@@ -68,7 +67,3 @@ def schedule_email(occasion, action="CREATE"):
             id=job_id,
             misfire_grace_time=86400,
         )
-
-        jobs = scheduler.get_jobs()
-
-    print(jobs[0])
