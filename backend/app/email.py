@@ -1,6 +1,7 @@
 from app import mail, scheduler
 from flask import current_app
 from flask_mail import Message
+import resend
 
 
 def send_email(app, subject, sender, recipients, text_body, html_body):
@@ -15,12 +16,20 @@ def send_email(app, subject, sender, recipients, text_body, html_body):
     - text_body: The plain text body of the email.
     - html_body: The HTML body of the email.
     """
-
-    with app.app_context():
-        msg = Message(subject=subject, sender=sender, recipients=recipients)
-        msg.body = text_body
-        msg.html = html_body
-        mail.send(msg)
+    resend.api_key = "re_ZBWFQhJf_EQmoQigbuYeaRfjJEgbBBUsR"
+    # with app.app_context():
+    #     msg = Message(subject=subject, sender=sender, recipients=recipients)
+    #     msg.body = text_body
+    #     msg.html = html_body
+    #     mail.send(msg)
+    r = resend.Emails.send(
+        {
+            "from": "onboarding@resend.dev",
+            "to": "bcdipeshwork@gmail.com",
+            "subject": "Hello World",
+            "html": "<p>Congrats on sending your <strong>first email</strong>!</p>",
+        }
+    )
 
 
 def schedule_email(occasion, job_id, action="CREATE"):
